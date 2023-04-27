@@ -34,6 +34,7 @@ function NavBar() {
                 className="nav-link active text-light"
                 aria-current="page"
                 style={{ fontSize: "16px", margin: "10px" }}
+                onClick={() => setIsNavOpen(false)}
               >
                 Home
               </Link>
@@ -43,6 +44,7 @@ function NavBar() {
                 to="/StakingPage"
                 className="nav-link text-light"
                 style={{ fontSize: "16px", margin: "10px" }}
+                onClick={() => setIsNavOpen(false)}
               >
                 Launch Dapp
               </Link>
