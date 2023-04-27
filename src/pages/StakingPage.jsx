@@ -3,7 +3,7 @@ import "../stakingPage.css";
 import { Carousel } from "react-bootstrap";
 import newsImage1 from "../images/news.jpeg";
 import newsImage2 from "../images/sling-logo.png";
-import heroeImage from "../images/sling-pix.png";
+
 
 function StakingPage() {
   const carouselItems = [
