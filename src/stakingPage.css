@@ -16,11 +16,22 @@
   
   .token-balance {
     border: 2px orange solid;
+    border-radius: 10px;
+    font-size: 1.5rem;
+    height: 120px;
+    width: 151px;
+    padding: 10px;
+    
+  }
+
+  .news-update {
+    border: 2px orange solid;
     padding: 10px;
     border-radius: 10px;
     font-size: 1.5rem;
     height: 120px;
     width: 340px;
+    
   }
   
   
