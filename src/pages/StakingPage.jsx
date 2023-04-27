@@ -33,7 +33,7 @@ function StakingPage() {
   ];
 
   return (
-    <div className="staking-page-container">
+    <div className="mt-5 mb-5">
       <div className="container-fluid">
         <div className="token-balance box-showdown">
           <p>Staking Balance</p>
