@@ -44,7 +44,7 @@ function StakingPage() {
             </div>
           </div>
           <div class="col mb-5">
-            
+             Sling Staking is a way for users to earn rewards on their SLING <br/> tokens by locking them up for a set period of time. <br/> By participating in Sling Staking, users can earn an annual <br/> percentage rate (APR) of 25% on their staked tokens. <br/> This incentivizes users to hold onto their SLING tokens for a longer period of time <br/> and contributes to the overall stability of the SLING ecosystem.
           </div>
         </div>
       </div>
