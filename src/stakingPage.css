@@ -14,15 +14,7 @@
     gap: 20px;
   }
   
-  .token-balance {
-    border: 2px orange solid;
-    border-radius: 10px;
-    font-size: 1.5rem;
-    height: 120px;
-    width: 351px;
-    padding: 10px;
-    
-  }
+  
 
   .news-update {
     border: 2px orange solid;
