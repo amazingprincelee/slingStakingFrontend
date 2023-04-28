@@ -1,41 +1,9 @@
 import React from "react";
 import "../stakingPage.css";
-import { Carousel } from "react-bootstrap";
-import newsImage1 from "../images/news.jpeg";
-import newsImage2 from "../images/sling-logo.png";
+
 
 function StakingPage() {
-  const carouselItems = [
-    {
-      id: 1,
-      image: newsImage1,
-      title: "Announcement",
-      description:
-        "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
-    },
-    {
-      id: 2,
-      image: newsImage2,
-      title: "New Feature",
-      description:
-        "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
-    },
-    {
-      id: 3,
-      image: newsImage1,
-      title: "Upcoming Event",
-      description:
-        "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
-    },
-    {
-      id: 4,
-      image: newsImage2,
-      title: "Important Update",
-      description:
-        "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.",
-    },
-  ];
-
+  
   return (
     <div>
       <div class="container mt-5">
