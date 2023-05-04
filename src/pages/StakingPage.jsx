@@ -3,6 +3,8 @@ import "../stakingPage.css";
 import { ethers } from "ethers";
 import ABI from '../ABI'
 
+//development
+
 function StakingPage() {
   const [inputValue, setInputValue] = useState();
   const [currentAction, setCurrentAction] = useState(null);
