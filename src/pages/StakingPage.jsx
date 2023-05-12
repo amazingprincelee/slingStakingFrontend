@@ -158,6 +158,7 @@ function StakingPage() {
               >
                 CLAIM REWARD
               </button> */}
+              <h4>Transaction History</h4>
 
               <table class="table">
                 <thead>
