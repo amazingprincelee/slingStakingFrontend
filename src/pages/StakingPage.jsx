@@ -61,13 +61,13 @@ function StakingPage() {
     getRewardBalanceUi().catch(console.error);
   });
 
-  const handleClaimReward = async () => {
-    const reward = await contract.claim();
-    console.log(`Transaction hash: ${reward.hash}`);
-    await reward.wait();
-    const rewardBalance = await contract.getRewardBalance();
-    console.log(`Reward balance: ${rewardBalance}`);
-  };
+  // const handleClaimReward = async () => {
+  //   const reward = await contract.claim();
+  //   console.log(`Transaction hash: ${reward.hash}`);
+  //   await reward.wait();
+  //   const rewardBalance = await contract.getRewardBalance();
+  //   console.log(`Reward balance: ${rewardBalance}`);
+  // };
 
   function handleChange(e) {
     setInputValue(e.target.value);
@@ -156,17 +156,7 @@ function StakingPage() {
               className="transfer-form box-showdown"
               style={{ height: "350px" }}
             >
-              <h1>Application Under Development</h1>
-              <p>
-                We will be using Sepolia Testnet to test this dapplication. You
-                need to get your metamask wallet setup with sepolia Testnet. You
-                will also need a Test SLING token for the exercise
-                <br />
-                There will be countless modification and migration of contract
-                during this phase.
-              </p>
-
-              <div class="col-3-lg col-lg-6 border rounded bg-warning border-warning m-2 mx-auto">
+              {/* <div class="col-3-lg col-lg-6 border rounded bg-warning border-warning m-2 mx-auto">
                 <p>{rewardBalance} SLING</p>
               </div>
               <button
@@ -174,20 +164,36 @@ function StakingPage() {
                 onClick={handleClaimReward}
               >
                 CLAIM REWARD
-              </button>
+              </button> */}
 
-              {/* <p>
-                Sling Staking is a way for users to earn rewards on their SLING{" "}
-                <br />
-                tokens by locking them up for a set period of time. <br />
-                By participating in Sling Staking, users can earn an annual{" "}
-                <br />
-                percentage rate (APR) of 25% on their staked tokens.
-                <br /> This incentivizes users to hold onto their SLING tokens
-                for a longer period of time
-                <br /> and contributes to the overall stability of the SLING
-                ecosystem.
-              </p> */}
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">STAKED</th>
+                    <th scope="col">EARNED</th>
+                    <th scope="col">ACTIVE</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <p style={{fontWeight: "bold"}}>5000000</p>
+                      <p>90 Day Locked - APR 25%</p>
+                    </td>
+                    <td>2500000 of 2500000 rewards earned</td>
+                    <td>WITHDRAW</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p style={{fontWeight: "bold"}}>10000000</p>
+                      <p>90 Day Locked - APR 25%</p>
+      
+                    </td>
+                    <td>5000000 of 5000000 rewards earned</td>
+                    <td>WITHDRAW</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
