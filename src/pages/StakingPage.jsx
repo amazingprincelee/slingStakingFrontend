@@ -3,22 +3,17 @@ import "../stakingPage.css";
 import { ethers } from "ethers";
 import ABI from "../ABI";
 
-//development
-
 function StakingPage() {
-  const [inputValue, setInputValue] = useState();
+  const [inputValue, setInputValue] = useState("");
   const [currentAction, setCurrentAction] = useState(null);
   const [tokenBalance, setTokenBalance] = useState(0);
   const [stakingBalance, setStakingBalance] = useState(0.0);
   const [rewardBalance, setRewardBalance] = useState(0);
   const [connectSignal, setConnectSignal] = useState("Not connect");
 
-  // Web3 connection
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
   const contractAddress = "0xCDc9Ff06A764ee82F0A10a4D3232B45eB15181cA";
-
-  // The Contract object
   const contract = new ethers.Contract(contractAddress, ABI, signer);
 
   useEffect(() => {
@@ -26,7 +21,6 @@ function StakingPage() {
       await provider.send("eth_requestAccounts", []);
     };
 
-    // A signal to show that the contract is active on UI
     const getConnectSignal = async () => {
       const connection = await contract.UIconnection();
       console.log(connection);
@@ -60,15 +54,7 @@ function StakingPage() {
     getBalance().catch(console.error);
     getStakingBalance().catch(console.error);
     getRewardBalanceUi().catch(console.error);
-  });
-
-  // const handleClaimReward = async () => {
-  //   const reward = await contract.claim();
-  //   console.log(`Transaction hash: ${reward.hash}`);
-  //   await reward.wait();
-  //   const rewardBalance = await contract.getRewardBalance();
-  //   console.log(`Reward balance: ${rewardBalance}`);
-  // };
+  }, []);
 
   function handleChange(e) {
     setInputValue(e.target.value);
@@ -82,17 +68,23 @@ function StakingPage() {
     setCurrentAction("withdraw");
   };
 
+  const handlePercentageButtonClick = (percentage) => {
+    const percentageValue = (percentage / 100) * tokenBalance;
+    setInputValue(percentageValue.toString());
+  };
+
+  const handleMaxButtonClick = () => {
+    setInputValue(tokenBalance.toString());
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (currentAction === "deposit") {
-      setCurrentAction("deposit");
       const parsedValue = ethers.utils.parseEther(inputValue);
       const depositUpdate = await contract.stake(parsedValue);
       await depositUpdate.wait();
       setInputValue("");
     } else if (currentAction === "withdraw") {
-      // handle withdraw logic here
-      setCurrentAction("withdraw");
       const parsedWithdrawValue = ethers.utils.parseEther(inputValue);
       const depositWithdrawUpdate = await contract.unstake(parsedWithdrawValue);
       await depositWithdrawUpdate.wait();
@@ -137,10 +129,10 @@ function StakingPage() {
                     value={inputValue}
                   />
                   <div className="percentage-buttons">
-                    <button className="percentage-button">25%</button>
-                    <button className="percentage-button">50%</button>
-                    <button className="percentage-button">75%</button>
-                    <button className="percentage-button">Max</button>
+                  <button className="percentage-button" onClick={() => handlePercentageButtonClick(25)}>25%</button>
+                    <button className="percentage-button" onClick={() => handlePercentageButtonClick(50)}>50%</button>
+                    <button className="percentage-button" onClick={() => handlePercentageButtonClick(75)}>75%</button>
+                    <button className="percentage-button" onClick={handleMaxButtonClick}>Max</button>
                   </div>
                   <button className="submit-button" onClick={handleDeposit}>
                     DEPOSIT
