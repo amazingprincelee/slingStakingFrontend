@@ -54,7 +54,7 @@ function StakingPage() {
     getBalance().catch(console.error);
     getStakingBalance().catch(console.error);
     getRewardBalanceUi().catch(console.error);
-  }, []);
+  });
 
   function handleChange(e) {
     setInputValue(e.target.value);
