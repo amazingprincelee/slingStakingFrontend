@@ -1,8 +1,11 @@
 import React, { useState } from "react";
+import {  useHistory } from "react-router-dom";
 
 const calcResultStyle = { margin: "10px", fontSize: "1.5rem", color: "blue" };
 
 function RewardCalc() {
+  const history = useHistory();
+
   const [inputValue, setInputValue] = useState("");
   const [stakeAmount, setStakeAmount] = useState("");
 
@@ -48,7 +51,9 @@ function RewardCalc() {
         <div className="stake-sling m-5 p-2">
           <h1>Stake Sling</h1>
           <p> Sling staking is currently available on the Ethereum Network.</p>
-          <button className="primary-btn">Launch Dapp</button>
+          <button className="primary-btn" onClick={() => history.push("/StakingPage")}>
+              Launch Dapp
+            </button>
         </div>
       </div>
     </div>

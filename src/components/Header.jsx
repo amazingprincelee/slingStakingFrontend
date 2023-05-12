@@ -1,11 +1,19 @@
 import React from "react";
-import {  useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import heroeImage from "../images/sling-pix.png";
-
 
 function Header() {
   const history = useHistory();
-  
+
+  const handleBuyClick = () => {
+    const buyButton = document.getElementById("buy-button");
+    if (buyButton) {
+      const yOffset = 50; // adjust this value to your preference
+      const y = buyButton.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="container-fluid header">
       <div className="container mb-5">
@@ -19,13 +27,12 @@ function Header() {
           </p>
 
           <div className="button-container">
-            
-
             <button className="primary-btn" onClick={() => history.push("/StakingPage")}>
               Launch Dapp
             </button>
-
-            <button className="secondary-btn">Buy Sling</button>
+            <button id="buy-button" className="secondary-btn" onClick={handleBuyClick}>
+              Buy Sling
+            </button>
           </div>
         </div>
 
