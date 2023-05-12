@@ -11,12 +11,12 @@ function StakingPage() {
   const [tokenBalance, setTokenBalance] = useState(0);
   const [stakingBalance, setStakingBalance] = useState(0.0);
   const [rewardBalance, setRewardBalance] = useState(0);
-  const [contractName, setContractname] = useState("The name of project");
+  const [connectSignal, setConnectSignal] = useState("Not connect");
 
   // Web3 connection
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
-  const contractAddress = "0x9E9227070CF650Bc0b1d37eF67Cb10f814c8FB08";
+  const contractAddress = "0xCDc9Ff06A764ee82F0A10a4D3232B45eB15181cA";
 
   // The Contract object
   const contract = new ethers.Contract(contractAddress, ABI, signer);
@@ -26,10 +26,11 @@ function StakingPage() {
       await provider.send("eth_requestAccounts", []);
     };
 
-    const getName = async () => {
-      const dName = await contract.contractName();
-      console.log(dName);
-      setContractname(dName);
+    // A signal to show that the contract is active on UI
+    const getConnectSignal = async () => {
+      const connection = await contract.UIconnection();
+      console.log(connection);
+      setConnectSignal(connection);
     };
 
     const getBalance = async () => {
@@ -54,7 +55,7 @@ function StakingPage() {
       setRewardBalance(rewardRounded);
     };
 
-    getName().catch(console.error);
+    getConnectSignal().catch(console.error);
     connectWallet().catch(console.error);
     getBalance().catch(console.error);
     getStakingBalance().catch(console.error);
@@ -101,7 +102,7 @@ function StakingPage() {
 
   return (
     <div>
-      <h1>{contractName}</h1>
+      <p className="m-2">{connectSignal}</p>
       <div class="container mt-5">
         <div class="container text-center">
           <div class="row align-items-center">
