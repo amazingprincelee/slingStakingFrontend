@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../stakingPage.css";
 import { ethers } from "ethers";
-import { toast } from "react-toastify";
 import ABI from "../ABI";
 
 function StakingPage() {
@@ -85,13 +84,11 @@ function StakingPage() {
       const depositUpdate = await contract.stake(parsedValue);
       await depositUpdate.wait();
       setInputValue("");
-      toast.success("Deposit successful!"); // Display success toast
     } else if (currentAction === "withdraw") {
       const parsedWithdrawValue = ethers.utils.parseEther(inputValue);
       const depositWithdrawUpdate = await contract.unstake(parsedWithdrawValue);
       await depositWithdrawUpdate.wait();
       setInputValue("");
-      toast.success("Withdrawal successful!"); // Display success toast
     }
   };
 
@@ -102,7 +99,7 @@ function StakingPage() {
         <div class="container text-center">
           <div class="row align-items-center">
             <div class="col-3-lg col-lg-6 border rounded bg-warning border-warning m-2 mx-auto">
-              <p>Total SLING Staked</p>
+              <p>Amount Staked</p>
               <p>{stakingBalance} SLING</p>
             </div>
             <div class="col-3-lg col-lg-6 border rounded bg-warning border-warning m-2 mx-auto">
