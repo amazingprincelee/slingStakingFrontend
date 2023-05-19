@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import ABI from "../ABI";
@@ -13,10 +13,10 @@ function StakingPage() {
   const [rewardBalance, setRewardBalance] = useState(0);
   const [connectSignal, setConnectSignal] = useState("Not connect");
 
-  const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const provider = useMemo(() => new ethers.providers.Web3Provider(window.ethereum), []);
   const signer = provider.getSigner();
   const contractAddress = "0x67397672ddE5F85A64aAf54C711CDBEC07484C35";
-  const contract = new ethers.Contract(contractAddress, ABI, signer);
+  const contract = useMemo(() => new ethers.Contract(contractAddress, ABI, signer), [contractAddress, signer]);
 
   useEffect(() => {
     const connectWallet = async () => {
@@ -66,7 +66,7 @@ function StakingPage() {
     getBalance().catch(console.error);
     getStakingBalance().catch(console.error);
     getRewardBalanceUi().catch(console.error);
-  }, []);
+  }, [contract, provider, signer]);
 
   function handleChange(e) {
     setInputValue(e.target.value);
