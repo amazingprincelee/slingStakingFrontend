@@ -15,7 +15,7 @@ function StakingPage() {
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
-  const contractAddress = "0xf6AE5ab552E5AcEB48B2E4809Ff4e44f6D05a824";
+  const contractAddress = "0x67397672ddE5F85A64aAf54C711CDBEC07484C35";
   const contract = new ethers.Contract(contractAddress, ABI, signer);
 
   useEffect(() => {
@@ -178,7 +178,7 @@ function StakingPage() {
               className=" transfer-form box-showdown"
               style={{ height: "350px" }}
             >
-              <h4>Transaction History</h4>
+              <h4>Transaction</h4>
 
               <table class="table">
                 <thead>
@@ -189,29 +189,52 @@ function StakingPage() {
                   </tr>
                 </thead>
                 <tbody>
-  {stakeTransactions.map((transaction, index) => (
-    <tr key={index}>
-      <td>
-        <p style={{ fontWeight: "bold" }}>
-          {transaction.amount && transaction.amount.toString()}
-        </p>
-        <p>{transaction.daysLocked && `${transaction.daysLocked} Day Locked`}</p>
-      </td>
-      <td>rewards earned</td>
-      <td>
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={() => handleWithdraw(index)}
-        >
-          WITHDRAW
-        </button>
-      </td>
-    </tr>
-  ))}
-</tbody>
+                  {stakeTransactions.map((transaction, index) => (
+                    <tr key={index}>
+                      <td>
+                        <p style={{ fontWeight: "bold" }}>
+                        {transaction.stakedAmount &&
+                          Math.floor(
+                            ethers.utils.formatUnits(
+                              transaction.stakedAmount,
+                              18
+                            )
+                          )}{" "}
+                        </p>
+                        <p>
+                          {transaction.daysLocked &&
+                            `${transaction.daysLocked} Day Locked`}
+                        </p>
+                      </td>
+                      <td>
+                        {transaction.rewardEarned &&
+                          Math.floor(
+                            ethers.utils.formatUnits(
+                              transaction.rewardEarned,
+                              18
+                            )
+                          )}{" "}
+                        rewards earned
+                      </td>
 
+                      <td>
+                        <button
+                          type="button"
+                          className="btn btn-success"
+                          onClick={() => handleWithdraw(index)}
+                        >
+                          WITHDRAW
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
               </table>
+              <p className="mt-5 text-center" style={{ fontSize: "0.8rem" }}>
+                Earn Rewards: By staking SLING tokens, you can earn rewards. The
+                more tokens you stake and the longer you stake them, the more
+                rewards you can potentially earn.
+              </p>
             </div>
           </div>
         </div>
