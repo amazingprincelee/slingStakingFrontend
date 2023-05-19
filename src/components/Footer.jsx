@@ -14,6 +14,9 @@ function Footer() {
               Our simple and intuitive platform allows you to earn rewards on your
               holdings by staking them with ease.
             </p>
+            <p className="text-muted mt-5">
+              Designed by D'AmazingPrinceLee (BB)
+            </p>
           </div>
           <div className="col-lg-4 col-md-6 mb-4 mb-md-0">
             <h3 className="underline mb-3">Utilities</h3>
@@ -38,9 +41,17 @@ function Footer() {
             </ul>
           </div>
         </div>
+        <div className="row">
+          <div className="col text-center">
+            <p className="text-muted">
+              &copy; {new Date().getFullYear()} SLING STAKING. All rights reserved.
+            </p>
+          </div>
+        </div>
       </div>
     </footer>
   );
 }
 
 export default Footer;
+

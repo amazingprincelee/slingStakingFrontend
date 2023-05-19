@@ -9,13 +9,12 @@ function StakingPage() {
   const [currentAction, setCurrentAction] = useState(null);
   const [tokenBalance, setTokenBalance] = useState(0);
   const [stakingBalance, setStakingBalance] = useState(0.0);
-  const [stakeTransactions, setStakeTransactions] = useState([]); // state variable to store the stake transactions
   const [rewardBalance, setRewardBalance] = useState(0);
   const [connectSignal, setConnectSignal] = useState("Not connect");
 
   const provider = new ethers.providers.Web3Provider(window.ethereum);
   const signer = provider.getSigner();
-  const contractAddress = "0xf6AE5ab552E5AcEB48B2E4809Ff4e44f6D05a824";
+  const contractAddress = "0xCDc9Ff06A764ee82F0A10a4D3232B45eB15181cA";
   const contract = new ethers.Contract(contractAddress, ABI, signer);
 
   useEffect(() => {
@@ -42,16 +41,6 @@ function StakingPage() {
       const stakedBalance = await contract.getStakingBalance();
       const stakedBalanceFormatted = ethers.utils.formatEther(stakedBalance);
       setStakingBalance(stakedBalanceFormatted);
-
-      const transactionCount = await contract.getTransactionCount(); // Add this function to your contract
-
-      // Fetch stake transactions
-      const transactions = [];
-      for (let i = 0; i < transactionCount; i++) {
-        const transaction = await contract.getTransaction(i);
-        transactions.push(transaction);
-      }
-      setStakeTransactions(transactions);
     };
 
     const getRewardBalanceUi = async () => {
@@ -74,14 +63,6 @@ function StakingPage() {
 
   const handleDeposit = () => {
     setCurrentAction("deposit");
-  };
-
-  const handleWithdraw = async (index) => {
-    const transaction = stakeTransactions[index];
-    const unstakeUpdate = await contract.unstake(transaction.amount);
-    await unstakeUpdate.wait();
-    toast.success("Withdrawal successful!");
-    // You may need to update the stake transactions after the withdrawal
   };
 
   const handlePercentageButtonClick = (percentage) => {
@@ -127,7 +108,7 @@ function StakingPage() {
       </div>
       <div class="container ">
         <div class="row align-items-center">
-          <div class="col-md-6">
+          <div class="col">
             <div class="container transfer-form text-center mb-5 box-showdown ">
               <div className="staking-form">
                 <h1>STAKE SLING</h1>
@@ -173,9 +154,9 @@ function StakingPage() {
               </div>
             </div>
           </div>
-          <div class="col-md-6 mb-5">
+          <div class="col mb-5">
             <div
-              className=" transfer-form box-showdown"
+              className="transfer-form box-showdown"
               style={{ height: "350px" }}
             >
               <h4>Transaction History</h4>
@@ -189,28 +170,31 @@ function StakingPage() {
                   </tr>
                 </thead>
                 <tbody>
-  {stakeTransactions.map((transaction, index) => (
-    <tr key={index}>
-      <td>
-        <p style={{ fontWeight: "bold" }}>
-          {transaction.amount && transaction.amount.toString()}
-        </p>
-        <p>{transaction.daysLocked && `${transaction.daysLocked} Day Locked`}</p>
-      </td>
-      <td>rewards earned</td>
-      <td>
-        <button
-          type="button"
-          className="btn btn-success"
-          onClick={() => handleWithdraw(index)}
-        >
-          WITHDRAW
-        </button>
-      </td>
-    </tr>
-  ))}
-</tbody>
-
+                  <tr>
+                    <td>
+                      <p style={{ fontWeight: "bold" }}>5000000</p>
+                      <p>90 Day Locked - APR 25%</p>
+                    </td>
+                    <td>2500000 of 2500000 rewards earned</td>
+                    <td>
+                      <button type="button" className="btn btn-success">
+                        WITHDRAW
+                      </button>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <p style={{ fontWeight: "bold" }}>10000000</p>
+                      <p>90 Day Locked - APR 25%</p>
+                    </td>
+                    <td>5000000 of 5000000 rewards earned</td>
+                    <td>
+                      <button type="button" className="btn btn-success">
+                        WITHDRAW
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
               </table>
             </div>
           </div>
@@ -221,3 +205,4 @@ function StakingPage() {
 }
 
 export default StakingPage;
+
